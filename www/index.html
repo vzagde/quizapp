@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, height=device-height, viewport-fit=cover, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" /> -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="theme-color" content="#2196f3">
+    <title>Quizapp</title>
+    <link rel="stylesheet" href="./css/framework7.material.min.css">
+    <link rel="stylesheet" href="./css/framework7.material.colors.min.css">
+    <link rel="stylesheet" href="./css/materialize-tags.css">
+    <link rel="stylesheet" async href="fonts/cooperhewitt-bold/font.css">
+    <link rel="stylesheet" async href="fonts/cooperhewitt-light/font.css">
+    <link rel="stylesheet" async href="fonts/cooperhewitt-medium/font.css">
+    <link rel="stylesheet" async href="./css/kitchen-sink.css">
+    <link rel="stylesheet" async href="./css/slick.css">
+    <link rel="stylesheet" href="./css/slick-theme.css">
+    <link rel="stylesheet" async href="./css/app.css">
+    <link rel="stylesheet" async href="./css/material-icons.css">
+    <link rel="stylesheet" async href="./css/framework7.icons.css">
+    <link rel="icon" href="img/icon.png">
+    <link rel="stylesheet" async href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="statusbar-overlay"></div>
+    <div class="panel-overlay"></div>
+    <div class="panel men_u panel-left panel-reveal">
+        <center><img src="img/neon.png" class="menu_logo" alt="" /></center>
+        <div class="content-block menu_sub">
+            <div><a href="main.html" class="close-panel menu_a">Home</a></div>
+            <div><a href="main.html" class="close-panel menu_a">Profile</a></div>
+            <div><a href="main.html" class="close-panel menu_a">History</a></div>
+            <div><a href="main.html" class="close-panel menu_a">Get Premium</a></div>
+            <div><a href="#" onclick="logout();" class="close-panel menu_a">logout</a></div>
+        </div>
+    </div>
+    <div class="views">
+        <div class="view view-main">
+            <div class="pages navbar-fixed toolbar-fixed">
+                <div data-page="index" class="page">
+                    <div class="page-content landing_bg">
+                        <div class="content-block">
+                            <a href="#" class="button index_logo_container"><img src="img/logo.png" class="index_logo"></a>
+                            <a href="#" onclick="continue_btn_signin()" class="button button-raised pettato_btn_trans">SIGN IN</a>
+                            <a href="#" onclick="goto_register('shopper')" class="button button-raised pettato_btn_trans">SIGN UP</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="cordova.js"></script>
+    <script src="./js/framework7.min.js"></script>
+    <script src="./js/jquery-2.2.4.min.js"></script>
+    <script src="./js/materialize-tags.js"></script>
+    <script src="./js/lockr.min.js"></script>
+    <script src="./js/slick.min.js"></script>
+    <script src="./js/my-app.js"></script>
+    <script src="./js/util.js"></script>
+</body>
+</html>
