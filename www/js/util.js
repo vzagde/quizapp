@@ -246,3 +246,173 @@ function load_city(selecter, callBack) {
         myApp.alert('Somthing went wrong, Please try again later!');
     }).always();
 }
+
+function change_lang(lang) {
+    default_lang = lang;
+    $(".item-content").removeClass('active');
+    $("."+lang).addClass('active');
+}
+
+function load_categories() {
+    myApp.showIndicator();
+    $.ajax({
+        url: base_url + 'get_category',
+        type: 'POST',
+        crossDomain: true,
+        data: {
+            lang: default_lang,
+        }
+    }).done(function(res){
+        var html = '';
+        $("#category-dyn").html(html);
+
+        $.each(res.category, function (index, value){
+            html+= '<li class="item-content" onclick="goto_subcategory('+value.id+')">'+
+                    '<div class="item-media"><i class="fa fa-university"></i></div>'+
+                    '<div class="item-inner">'+
+                    '<div class="item-title">'+value.category+'</div>'+
+                    '</div>'+
+                    '</li>';
+        })
+
+        $("#category-dyn").html(html);
+        myApp.hideIndicator();
+    }).fail(function(res){
+        myApp.hideIndicator();
+        myApp.alert('Somthing went wrong, Please try again later!');
+    });
+}
+
+function goto_subcategory(category) {
+    mainView.router.load({
+        url: 'subcategory.html',
+        query: {
+            category: category
+        },
+        ignoreCache: true,
+    });
+}
+
+function load_subcategory(category) {
+    myApp.showIndicator();
+    $.ajax({
+        url: base_url + 'get_subcategory',
+        type: 'POST',
+        crossDomain: true,
+        data: {
+            lang: default_lang,
+            category: category,
+        }
+    }).done(function(res){
+        var html = '';
+        $("#subcategory-dyn").html(html);
+
+        $.each(res.subcategory, function (index, value){
+            html+= '<li class="item-content" onclick="goto_questions('+value.id+')">'+
+                    '<div class="item-media"><i class="fa fa-university"></i></div>'+
+                    '<div class="item-inner">'+
+                    '<div class="item-title">'+value.sub_category+'</div>'+
+                    '</div>'+
+                    '</li>';
+        })
+
+        $("#subcategory-dyn").html(html);
+        myApp.hideIndicator();
+    }).fail(function(res){
+        myApp.hideIndicator();
+        myApp.alert('Somthing went wrong, Please try again later!');
+    });
+} 
+
+function goto_questions(subcategory) {
+    mainView.router.load({
+        url: 'question.html',
+        query: {
+            subcategory: subcategory
+        },
+        ignoreCache: true,
+    });
+}
+
+function load_question_data(subcategory, last_que_id) {
+    myApp.showIndicator();
+    $.ajax({
+        url: base_url + 'get_ques',
+        type: 'POST',
+        crossDomain: true,
+        data: {
+            lang: default_lang,
+            sub_category: subcategory,
+            last_que_id: last_que_id,
+        }
+    }).done(function(res){
+        var html = '';
+
+        $("#ques-dyn").html(html);
+        $("#answers-dyn").html(html);
+
+        console.log(res.que_ans[0]);
+
+        if (default_lang == 'English') {
+            $("#ques-dyn").html(res.que_ans[0].question_eng);
+        } else if (default_lang == 'Urdu') {
+            $("#ques-dyn").html(res.que_ans[0].question_urdu);
+        } else if (default_lang == 'Hindi') {
+            $("#ques-dyn").html(res.que_ans[0].question_hindi);
+        } else if (default_lang == 'Punjabi') {
+            $("#ques-dyn").html(res.que_ans[0].question_punjabi);
+        }
+
+        html =  '<li>'+
+                    '<label class="label-radio item-content">'+
+                        '<input type="radio" name="my-radio" value="'+res.que_ans[0].option1+'">'+
+                        '<div class="item-media">'+
+                            '<i class="icon icon-form-radio"></i>'+
+                        '</div>'+
+                        '<div class="item-inner">'+
+                            '<div class="item-title">'+res.que_ans[0].option1+'</div>'+
+                        '</div>'+
+                    '</label>'+
+                '</li>'+
+                '<li>'+
+                    '<label class="label-radio item-content">'+
+                        '<input type="radio" name="my-radio" value="'+res.que_ans[0].option2+'">'+
+                        '<div class="item-media">'+
+                            '<i class="icon icon-form-radio"></i>'+
+                        '</div>'+
+                        '<div class="item-inner">'+
+                            '<div class="item-title">'+res.que_ans[0].option2+'</div>'+
+                        '</div>'+
+                    '</label>'+
+                '</li>'+
+                '<li>'+
+                    '<label class="label-radio item-content">'+
+                        '<input type="radio" name="my-radio" value="'+res.que_ans[0].option3+'">'+
+                        '<div class="item-media">'+
+                            '<i class="icon icon-form-radio"></i>'+
+                        '</div>'+
+                        '<div class="item-inner">'+
+                            '<div class="item-title">'+res.que_ans[0].option3+'</div>'+
+                        '</div>'+
+                    '</label>'+
+                '</li>'+
+                '<li>'+
+                    '<label class="label-radio item-content">'+
+                        '<input type="radio" name="my-radio" value="'+res.que_ans[0].option4+'">'+
+                        '<div class="item-media">'+
+                            '<i class="icon icon-form-radio"></i>'+
+                        '</div>'+
+                        '<div class="item-inner">'+
+                            '<div class="item-title">'+res.que_ans[0].option4+'</div>'+
+                        '</div>'+
+                    '</label>'+
+                '</li>';
+
+
+        $("#answers-dyn").html(html);
+        myApp.hideIndicator();
+    }).fail(function(res){
+        myApp.hideIndicator();
+        myApp.alert('Somthing went wrong, Please try again later!');
+    });
+}

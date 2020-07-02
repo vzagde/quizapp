@@ -1725,3 +1725,13 @@ div.toolbar-inner:has(> textarea.focus-state) {
     vertical-align: middle;
     width: 27px;
 }
+
+
+.item-content.active {
+    background: #328af7;
+    color: #ffffff;
+}
+
+#answers-dyn li .item-title, #ques-dyn {
+    white-space: inherit;
+}

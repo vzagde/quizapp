@@ -6,6 +6,9 @@ var user_data;
 var email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 var phone_regex = /^\d{10}$/;
 
+var default_lang = 'English';
+var last_que_id = 0;
+
 var calendarDefault;
 
 var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
@@ -39,7 +42,16 @@ myApp.onPageInit('register', function(page) {
 });
 
 myApp.onPageInit('main', function(page) {
+    load_categories();
 });
 
 myApp.onPageInit('subcategory', function(page) {
+    load_subcategory(page.query.category);
+});
+
+myApp.onPageInit('change_language', function(page) {
+});
+
+myApp.onPageInit('question', function(page) {
+    load_question_data(page.query.subcategory, last_que_id);
 });
